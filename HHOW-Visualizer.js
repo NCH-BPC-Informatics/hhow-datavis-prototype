@@ -1,5 +1,5 @@
 var displayDateFormat = d3.time.format("%m/%d/%Y");
-var filename = "https://html5-cosmocracy.c9.io/SpecimenStats10000.csv";
+var filename = "SpecimenStats10000.csv";
 d3.csv(filename, function(error, data) {
             if (error) {
                 var msg = "Could not read " + filename;

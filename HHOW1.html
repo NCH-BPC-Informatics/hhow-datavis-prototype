@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+<title>HHOW Example 1</title>
+<style type="text/css">
+    #mainContent {
+    	font-family: Arial, Helvetica, sans-serif;
+    	font-size: xx-large;
+    	font-weight: bold;
+    	background-color: #E3F0FB;
+    	border-radius: 4px;
+    	padding: 10px;
+    	text-align: center;
+    }
+    pre {display:none;}
+</style>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.11/crossfilter.min.js"></script>
+<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/dc/1.7.3/dc.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dc/1.7.3/dc.css"/>
+</head>
+
+<body>	 
+	   	
+<div id="barChartTemp" class="chart"></div>	
+<div id="barChartPsal" class="chart"></div>
+<div style='clear:both'></div> 	
+<div class="dc-data-count">
+<p>
+<span class="filter-count"></span> selected out of <span class="total-count"></span> records | <a href="javascript:dc.filterAll(); 	
+	dc.renderAll();">Reset filters</a>
+</p>
+<br/>
+</div>
+<div id="pathological-status" class="chart">
+    <span>Pathological Status</span>
+</div>
+
+    <div id="monthly-specimen-collection-chart"></div>
+    <p class="muted pull-right" style="margin-right: 15px;">select a time range to zoom in</p>
+
+    <div id='dc-data-table'>
+        <!-- create a custom header -->
+        <!--
+        <div class='header'>
+            <span>collectionDate</span>
+            <span>specimenBiophysicalType</span>
+            <span>preservationType</span>
+            <span>fmaAnatomicSourceLocation</span>
+            <span>pathologicalStatus</span>
+            <span>diseaseStatus</span>
+            <span>collectionInstitution</span>
+            <span>SpecimenCount</span>
+        </div>
+        -->
+        <!-- data rows will filled in here -->
+    </div>
+    
+<script type='text/javascript' src="HHOW1.js"></script>
+</body>

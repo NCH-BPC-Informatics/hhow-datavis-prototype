@@ -26,7 +26,8 @@ d3.csv(filename, function (error, data) {
 
     var collectionYearBucketedDimension = ndx.dimension(function (d) {
         var year = d3.time.year(d.collectionDate).getFullYear();
-        return (year < 2005) ? "Before 2005" : year;
+        // return (year < 2005) ? "Before 2005" : year;
+        return year;
     });
     var collectionYearBucketedGroup = collectionYearBucketedDimension.group();
 
@@ -141,10 +142,58 @@ d3.csv(filename, function (error, data) {
         .dimension(ndx)
         .group(all);
 
+    /*
+    specimenCountGroup = ndx.groupAll().reduce(
+        // callback for when data is added to the current filter results
+        function (p, v) {
+            p.count += v.SpecimenCount;
+            return p;
+        },
+        // callback for when data is removed from the current filter results
+        function (p, v) {
+            p.count -= v.SpecimenCount;
+            return p;
+        },
+        // initialize p
+        function () {
+            return {
+                count: 0
+            };
+        }  
+    );
+    */
 
+    /*
+    //var specimenCounterND = dc.numberDisplay(".specimen-counter");
+    var specimenCounterND = dc.numberDisplay(".specimen-counter");
+    specimenCounterND
+        .formatNumber(d3.format(".3s"))
+        .valueAccessor(function (p) {
+            return p.count;
+        })
+        .group(specimenCountGroup);
+    */
 
+    var specimenCountGroup = ndx.groupAll().reduceSum(function (p) { return p.SpecimenCount; });
+    var specimenCountND = dc.numberDisplay(".candidate-specimens-counter")
+        .formatNumber(d3.format(".g"))
+        .valueAccessor(function (p) { return p; })
+        .group(specimenCountGroup);
 
+    var totalSpecimenCount = specimenCountGroup.value();
+    var specimenCountND = dc.numberDisplay(".total-specimens-counter")
+        .formatNumber(d3.format(".g"))
+        .valueAccessor(function (p) { return totalSpecimenCount; })
+        .group(specimenCountGroup);
 
+    /*
+    http://getbootstrap.com/examples/theme/#
+    http://www.codeproject.com/Articles/693841/Making-Dashboards-with-Dc-js-Part-1-Using-Crossfil
+    file:///C:/TDE/GitHub/hhow-datavis-prototype/HHOW-Visualizer.html
+    https://becomingadatascientist.wordpress.com/tag/dc-js/
+    http://paletton.com/#uid=72G0u0kfDpf6bEGaJuhkgkIphfP
+    http://stackoverflow.com/questions/27789872/display-the-number-of-distinct-items-with-data-count-widget
+    */
     var specimenStatsGrid = dc.dataTable('#specimen-stats-grid');
     specimenStatsGrid
         .width(960).height(800)
@@ -193,3 +242,11 @@ d3.csv(filename, function (error, data) {
         dc.renderAll();
     });
 });
+
+function print_filter(filter) {
+    var f = eval(filter);
+    if (typeof (f.length) != "undefined") { } else { }
+    if (typeof (f.top) != "undefined") { f = f.top(Infinity); } else { }
+    if (typeof (f.dimension) != "undefined") { f = f.dimension(function (d) { return ""; }).top(Infinity); } else { }
+    console.log(filter + "(" + f.length + ") = " + JSON.stringify(f).replace("[", "[\n\t").replace(/}\,/g, "},\n\t").replace("]", "\n]"));
+}

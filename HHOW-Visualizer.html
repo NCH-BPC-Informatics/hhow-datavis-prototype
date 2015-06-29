@@ -1,4 +1,4 @@
-< !DOCTYPE html>
+﻿< !DOCTYPE html>
   <html lang="en">
 
   <head>
@@ -26,6 +26,10 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- COG-specific -->
+    <link href='http://fonts.googleapis.com/css?family=Bitter:700' rel='stylesheet' type='text/css'>
+
   </head>
 
   <body>
@@ -58,6 +62,9 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><div class="coglogo">CHILDREN'S</br>ONCOLOGY<br />GROUP</div></li>
+            </ul>
           <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Biorepository Inventory <span class="sr-only">(current)</span></a></li>
             <li><a href="#">Biospecimen Pipeline</a></li>
@@ -67,7 +74,10 @@
             <li><a href="">Data Pivot</a></li>
             <li><a href="">Export</a></li>
           </ul>
+
         </div>
+
+
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> Biorepository Inventory Explorer</h1>
 
@@ -92,10 +102,36 @@
             </div>
 
             <div class="col-xs-6 col-sm-3 placeholder">
-              <button type="button" class="btn btn-default btn-primary btn-lg" onclick="dc.filterAll();dc.renderAll();">
-                <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Reset Filters
-              </button>
+                <ul style="list-style-type: none;">
+                    <li>
+                        <button type="button" class="btn btn-default btn-primary btn-lg" onclick="dc.filterAll();dc.renderAll();">
+                            <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Reset Filters
+                        </button>
+                    </li>
+                    <li><button class="btn btn-info specimen-count-badge" type="button">
+    Candidate Specimens <span class="badge"><span class="badge candidate-specimens-counter"></span></span>
+</button>
+                    </li>
+                    <li><button class="btn btn-info total-specimen-count-badge" type="button">
+    Total Specimens <span class="badge"><span class="badge total-specimens-counter"></span></span>
+</button></li>
+                </ul>
+
+                <!--
               <i><span class="dc-data-count">Filtered to <span class="filter-count"></span> out of <span class="total-count"></span> records</span></i>
+                <br/>
+                <i>Filtered to <span class="specimen-counter"></span> specimen(s) out of <span class="specimen-total-count"></span></i>
+                <ul class="nav nav-pills">
+                    <li class="active" role="presentation">
+                        <a href="#">
+                            <span class="dc-data-count">Candidate Specimens<span class="badge specimen-counter">12123123</span></span>
+                        </a>
+                    </li>
+                </ul>
+                    -->
+
+                
+
             </div>
 
             <!--

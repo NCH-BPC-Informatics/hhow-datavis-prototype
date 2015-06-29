@@ -107,3 +107,86 @@ body {
 .placeholder chart h4 {
   margin-bottom: 30px;
 }
+
+#specimen-counter-box {
+    background: #74AE59;
+    width: 200px;
+    font-size: 64px;
+    text-align: center;
+    /*padding-top: 63px;
+    #padding-bottom: 63px; */
+    height: 74px;
+}
+
+/* 
+    COG Style Overrides 
+    http://paletton.com/#uid=12G0u0kfDpf6bEGaJuhkgkIphfP
+*/
+a {
+    color: #115341;
+}
+body {
+    color: #115341;
+}
+.navbar-inverse {
+    background-color: #74AE59;
+}
+.navbar-inverse .navbar-brand {
+    color: #115341;
+}
+.sidebar {
+    background-color: #C9E7BA;
+}
+#specimen-counter-box {
+    background-color: #C9E7BA;
+    border-color: #204D74;
+}
+.btn-primary {
+    color: #115341;
+    background-color: #C9E7BA;
+}
+.btn-primary:hover {
+    color: #115341;
+    background-color: #74AE59;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: #115341;
+}
+.nav-sidebar > .active > a, .nav-sidebar > .active > a:hover, .nav-sidebar > .active > a:focus {
+    background-color: #74AE59;
+    color: #fff;
+}
+html body div.container-fluid div.row div.col-sm-3.col-md-2.sidebar {
+    width: 250px;
+}
+html body div.container-fluid div.row div.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main {
+    margin-left: 250px;
+}
+.nav-pills > li.active > a,  .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    background-color: #74AE59;
+}
+.nav-pills > .active > a > .badge {
+    color: #74AE59;
+}
+.coglogo {
+    font-family: 'Bitter', serif;
+    font-size: 24px;
+    color: white;
+    background-color: #74AE59;
+    line-height: 1.1;
+    margin-left: 20px;
+    margin-right: 25px;
+    padding: 10px 15px 10px 25px;
+}
+button.specimen-count-badge, button.specimen-count-badge:hover, button.specimen-count-badge:focus,
+button.total-specimen-count-badge, total-button.specimen-count-badge:hover, total-button.specimen-count-badge:focus {
+    color: white;
+    background-color: #74AE59;
+}
+
+button.specimen-count-badge span.badge, button.total-specimen-count-badge span.badge {
+    color: #74AE59;
+}
+button.specimen-count-badge,  button.total-specimen-count-badge {
+    width: 260px;
+}

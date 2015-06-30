@@ -164,6 +164,7 @@ html body div.container-fluid div.row div.col-sm-9.col-sm-offset-3.col-md-10.col
 }
 .nav-pills > li.active > a,  .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
     background-color: #74AE59;
+    border-color: #74AE59;
 }
 .nav-pills > .active > a > .badge {
     color: #74AE59;
@@ -178,15 +179,7 @@ html body div.container-fluid div.row div.col-sm-9.col-sm-offset-3.col-md-10.col
     margin-right: 25px;
     padding: 10px 15px 10px 25px;
 }
-button.specimen-count-badge, button.specimen-count-badge:hover, button.specimen-count-badge:focus,
-button.total-specimen-count-badge, total-button.specimen-count-badge:hover, total-button.specimen-count-badge:focus {
-    color: white;
-    background-color: #74AE59;
-}
-
-button.specimen-count-badge span.badge, button.total-specimen-count-badge span.badge {
-    color: #74AE59;
-}
-button.specimen-count-badge,  button.total-specimen-count-badge {
-    width: 260px;
+.badge {
+  color: white;
+  background-color: #115341;
 }

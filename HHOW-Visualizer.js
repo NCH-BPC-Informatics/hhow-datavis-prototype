@@ -26,8 +26,8 @@ d3.csv(filename, function (error, data) {
 
     var collectionYearBucketedDimension = ndx.dimension(function (d) {
         var year = d3.time.year(d.collectionDate).getFullYear();
-        // return (year < 2005) ? "Before 2005" : year;
-        return year;
+        return (year < 2005) ? 0 : year;
+        // return year;
     });
     var collectionYearBucketedGroup = collectionYearBucketedDimension.group();
 
@@ -90,7 +90,7 @@ d3.csv(filename, function (error, data) {
     var collectionYearChart = dc.rowChart('#collection-year');
     collectionYearChart
         .width(300)
-        .height(300)
+        .height(350)
         .margins({
             top: 20,
             left: 10,
@@ -108,6 +108,9 @@ d3.csv(filename, function (error, data) {
             return d.value;
         })
         */
+        .label(function (d) {
+            return d.key == 0 ? "Before 2005" : d.key;
+        })
         .elasticX(true)
         .xAxis().ticks(4);
 
@@ -178,13 +181,15 @@ d3.csv(filename, function (error, data) {
     var specimenCountND = dc.numberDisplay(".candidate-specimens-counter")
         .formatNumber(d3.format(".g"))
         .valueAccessor(function (p) { return p; })
-        .group(specimenCountGroup);
+        .group(specimenCountGroup)
+        .transitionDuration(0);
 
     var totalSpecimenCount = specimenCountGroup.value();
     var specimenCountND = dc.numberDisplay(".total-specimens-counter")
         .formatNumber(d3.format(".g"))
         .valueAccessor(function (p) { return totalSpecimenCount; })
-        .group(specimenCountGroup);
+        .group(specimenCountGroup)
+        .transitionDuration(0);
 
     /*
     http://getbootstrap.com/examples/theme/#

@@ -184,14 +184,20 @@
 
           </div>
 
-
-
-
-
-
-          <h2 class="sub-header" style="clear: both;">Inventory Detail</h2>
-
-          <div class="table-responsive">
+            <h2 class="sub-header">
+                Inventory Detail
+                <span class="btn-group" style="float:right">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Download <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" download="specimen_detail.xls" onclick="return ExcellentExport.excel(this, 'specimen-stats-grid', 'Specimen Detail');">Excel Workbook</a></li>
+                        <li><a href="#" download="specimen_detail.csv" onclick="return ExcellentExport.csv(this, 'specimen-stats-grid');">CSV File</a></li>
+                        <li><a href="#" download="specimen_detail.R" onclick="return ExcellentExport.r(this, 'specimen-stats-grid');">R Script</a></li>
+                    </ul>
+                </span>
+            </h2>
+          <div id="data-table" class="table-responsive">
             <table id="specimen-stats-grid" class="table table-striped">
               <thead>
                 <tr>
@@ -220,10 +226,11 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="ie10-viewport-bug-workaround.js"></script>
 
-    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.11/crossfilter.min.js"></script>
-    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/dc/1.7.3/dc.js"></script>
-    <script type='text/javascript' src="HHOW-Visualizer.js"></script>
+      <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+      <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.11/crossfilter.min.js"></script>
+      <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/dc/1.7.3/dc.js"></script>
+      <script type='text/javascript' src="js/excellentexport-1.4/excellentexport.js"></script>
+      <script type='text/javascript' src="HHOW-Visualizer.js"></script>
   </body>
 
   </html>

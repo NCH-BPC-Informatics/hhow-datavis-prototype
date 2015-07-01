@@ -179,35 +179,13 @@ html body div.container-fluid div.row div.col-sm-9.col-sm-offset-3.col-md-10.col
 }
 
 .hhowlogo {
-    text-align: center;
     background-color: white;
     margin-left: 25px;
     margin-right: 25px;
-    padding: 0px 25px 10px 0px;
 }
-.hhowlogo-image {
-    text-align: center;
-    background-color: white;
-    margin-top: 10px;
-    margin-left: 25px;
-    margin-right: 0px;
-}
-.hhowlogo-text1 {
-    font-family: 'Architects Daughter', cursive;
-    font-size: 15px;
-    color: darkgray;
-    margin: 0;
-    margin-left: 10px;
-    margin-right: -20px;
-}
-.hhowlogo-text2 {
-    font-family: 'Times New Roman';
-    font-size: 12px;
-    color: black;
-    margin: 0;
-    margin-left: 15px;
-    margin-right: -10px;
-    font-style: italic;
+.hhowlogo img {
+    padding: 5px 5px 5px 5px;
+
 }
 .badge {
   color: white;

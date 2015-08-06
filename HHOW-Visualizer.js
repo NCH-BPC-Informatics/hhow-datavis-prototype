@@ -1,3 +1,25 @@
+String.prototype.trunc =
+      function(n){
+          return this.substr(0,n-1)+(this.length>n?'&hellip;':'');
+      };
+
+d3.csv("StudyList.csv", function(error,data) {
+	if (error) {
+		var msg = "Could not read study list";
+		console.log(msg);
+		alert(msg);
+		return;
+	}
+	data.forEach(function (d) {
+		if(d.StudyTitle.length > 0) {
+		$('#protocol-picker')
+			  .append($('<option data-subtext="'+d.StudyTitle.trunc(100)+'">', { value : d.CtepStudyID })
+			  .text(d.CtepStudyID));
+		}
+	});
+	$('#protocol-picker').selectpicker('refresh');
+});
+
 var displayDateFormat = d3.time.format("%m/%d/%Y");
 var filename = "SpecimenStats10000.csv";
 d3.csv(filename, function (error, data) {
@@ -13,7 +35,9 @@ d3.csv(filename, function (error, data) {
     data.forEach(function (d) {
         d.collectionDate = dateFormat.parse(d.collectionDate);
         d.collectionMonth = d3.time.month(d.collectionDate); // pre-calculate month for better performance
-        d.SpecimenCount = +d.SpecimenCount;
+        // d.SpecimenCount = +d.SpecimenCount;
+        var number = d.SpecimenCount.match(/\d+$/);
+		d.SpecimenCount = parseInt(number, 10);
     });
 
     var ndx = crossfilter(data);
@@ -50,6 +74,11 @@ d3.csv(filename, function (error, data) {
         }
     );
 
+/*
+    var protocolDimension = ndx.dimension(function (d) {
+        return d.CtepStudyID;
+    });
+*/
     var collectionDateDimension = ndx.dimension(function (d) {
         return d.collectionDate;
     });
@@ -162,7 +191,7 @@ d3.csv(filename, function (error, data) {
             return {
                 count: 0
             };
-        }  
+        }
     );
     */
 
@@ -177,17 +206,20 @@ d3.csv(filename, function (error, data) {
         .group(specimenCountGroup);
     */
 
-    var specimenCountGroup = ndx.groupAll().reduceSum(function (p) { return p.SpecimenCount; });
+    var specimenCountGroup = ndx.groupAll().reduceSum(function (p) {
+			return p.SpecimenCount; });
     var specimenCountND = dc.numberDisplay(".candidate-specimens-counter")
         .formatNumber(d3.format(".g"))
-        .valueAccessor(function (p) { return p; })
+        .valueAccessor(function (p) {
+			return p; })
         .group(specimenCountGroup)
         .transitionDuration(0);
 
     var totalSpecimenCount = specimenCountGroup.value();
     var specimenCountND = dc.numberDisplay(".total-specimens-counter")
         .formatNumber(d3.format(".g"))
-        .valueAccessor(function (p) { return totalSpecimenCount; })
+        .valueAccessor(function (p) {
+			return totalSpecimenCount; })
         .group(specimenCountGroup)
         .transitionDuration(0);
 
@@ -215,6 +247,7 @@ d3.csv(filename, function (error, data) {
             function (d) { return d.pathologicalStatus; },
             function (d) { return d.diseaseStatus; },
             function (d) { return d.collectionInstitution; },
+            function (d) { return d.CtepStudyID; },
             function (d) { return d.SpecimenCount; }
         ])
         .sortBy(function (d) {
@@ -223,8 +256,8 @@ d3.csv(filename, function (error, data) {
 
     var monthlySpecimenCollectionChart = dc.barChart('#monthly-specimen-collection-chart');
     monthlySpecimenCollectionChart
-    .width(990)
-    .height(300)
+    .width(900)
+    .height(100)
     .margins({
         top: 0,
         right: 50,
@@ -235,16 +268,28 @@ d3.csv(filename, function (error, data) {
     .group(specimensByMonthGroup)
     .centerBar(true)
     .gap(1)
-    .x(d3.time.scale().domain([new Date(1985, 0, 1), new Date(2015, 11, 31)]))
+    .x(d3.time.scale().domain([new Date(2000, 0, 1), new Date(2015, 11, 31)]))
+    .elasticY(true)
     .round(d3.time.month.round)
     // .alwaysUseRounding(true)
     .xUnits(d3.time.months);
+    monthlySpecimenCollectionChart.yAxis().ticks(0);
 
 
-    // render all charts
+
     $(document).ready(function () {
+		// Render all charts
         dc.filterAll();
         dc.renderAll();
+        /*
+        // Install listener for protocol list changes
+        $('#protocol-picker').change( function() {
+			var selectedValues = $('#protocol-picker').val();
+			protocolDimension.filter(selectedValues);
+			dc.renderAll();
+			dc.redrawAll();
+		});
+		*/
     });
 });
 

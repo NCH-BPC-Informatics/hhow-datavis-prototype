@@ -1,4 +1,4 @@
-< !DOCTYPE html>
+﻿<!DOCTYPE html>
   <html lang="en">
 
   <head>
@@ -16,11 +16,8 @@
     <!-- <link href="../../dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dc/1.7.3/dc.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dc/1.7.4/dc.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/css/bootstrap-select.min.css" />
-
-    <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -31,7 +28,9 @@
     <!-- COG-specific -->
     <link href='https://fonts.googleapis.com/css?family=Bitter:700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-
+    <link rel="stylesheet" href="dc-2.0.0-beta18.css" />
+      <!-- Custom styles for this template -->
+      <link href="dashboard.css" rel="stylesheet">
   </head>
 
   <body>
@@ -91,102 +90,66 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> Biorepository Inventory Explorer</h1>
 
+            <div class="row placeholders">
+                <div class="col-sm-6 placeholder">
+                    <div id="protocol-category" class="chart">
+                        <h4>Protocol Category</h4>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <ul style="list-style-type: none;">
+                        <li>
+                            <button type="button" class="btn btn-default btn-primary btn-lg" onclick="dc.filterAll(); dc.renderAll(); dc.redrawAll();">
+                                <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Reset Filters
+                            </button>
+                        </li>
+                    </ul>
+
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            Candidate Specimens <span class="badge"><span class="badge candidate-specimens-counter"></span></span>
+                        </li>
+                        <li class="list-group-item">
+                            Total Specimens <span class="badge"><span class="badge total-specimens-counter"></span></span>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+
           <div class="row placeholders">
-
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <div id="pathological-status" class="chart">
-                <h4>Pathological Status</h4>
+              <div class="col-sm-3 placeholder">
+                  <div id="protocol-status" class="chart">
+                      <h4>Collection Status</h4>
+                  </div>
               </div>
-            </div>
-
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <div id="specimen-biophysical-type" class="chart">
-                <h4>Specimen Type</h4>
-                <span style="display: none">
-                <span id="specimen-type-filter-summary" class="filter"></span>
-                <span>
+              <div class="col-sm-3 placeholder">
+                  <div id="specimen-biophysical-type" class="chart">
+                      <h4>Specimen Type</h4>
+                      <span style="display: none">
+                          <span id="specimen-type-filter-summary" class="filter"></span>
+                          <span>
+                  </div>
               </div>
-            </div>
 
-            <div class="col-xs-6 col-sm-3 placeholder">
+            <div class="col-sm-3 placeholder">
               <div id="disease-status" class="chart">
                 <h4>Disease Status</h4>
               </div>
             </div>
 
-            <div class="col-xs-6 col-sm-3 placeholder">
-                <ul style="list-style-type: none;">
-                    <li>
-                        <button type="button" class="btn btn-default btn-primary btn-lg" onclick="/*$('#protocol-picker').val(null).selectpicker('refresh'); protocolDimension.filter(null); */ dc.filterAll(); dc.renderAll(); dc.redrawAll();">
-                            <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Reset Filters
-                        </button>
-                    </li>
-                </ul>
 
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        Candidate Specimens <span class="badge"><span class="badge candidate-specimens-counter"></span></span>
-                    </li>
-                    <li class="list-group-item">
-                        Total Specimens <span class="badge"><span class="badge total-specimens-counter"></span></span>
-                    </li>
-                </ul>
-
-                <!--
-              <i><span class="dc-data-count">Filtered to <span class="filter-count"></span> out of <span class="total-count"></span> records</span></i>
-                <br/>
-                <i>Filtered to <span class="specimen-counter"></span> specimen(s) out of <span class="specimen-total-count"></span></i>
-                <ul class="nav nav-pills">
-                    <li class="active" role="presentation">
-                        <a href="#">
-                            <span class="dc-data-count">Candidate Specimens<span class="badge specimen-counter">12123123</span></span>
-                        </a>
-                    </li>
-                </ul>
-                    -->
-
-
-
-            </div>
-
-            <!--
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            -->
           </div>
 
-          <div class="row placeholders">
-
-            <!-- <div class="col-xs-6 col-sm-3 placeholder"> -->
-            <div class="col-md-4 placeholder">
-              <div id="collection-year" class="chart">
-                <h4>Collection Year</h4>
-              </div>
+            <div class="row placeholders">
+                <div class="col-sm-3 placeholder">
+                    <div id="protocols3" class="chart">
+                        <h4>Collection Protocols</h4>
+                    </div>
+                </div>
             </div>
-
-            <div class="col-md-8 placeholder" style="padding-top:50px">
-				<h4>Specimen Collection Timeline</h4>
-              <div id="monthly-specimen-collection-chart"></div>
-              <p class="muted pull-right" style="margin-right: 15px;">select a time range to zoom in</p>
-            </div>
-
-			<h4 style="padding-top:50px">Collection Protocol(s):</h4>
-			<select id="protocol-picker" class="selectpicker" multiple data-width="900px" title='Select one or more protocols...'>
-            </select>
-          </div>
 
             <h2 class="sub-header">
                 Inventory Detail
@@ -205,15 +168,15 @@
             <table id="specimen-stats-grid" class="table table-striped">
               <thead>
                 <tr>
-                  <th>Collection Dt</th>
-                  <th>Specimen Type</th>
-                  <th>Preservation</th>
-                  <th>Anatomic Source</th>
-                  <th>Pathological Status</th>
-                  <th>Disease Status</th>
-                  <th>Collection Institution</th>
-                  <th>Collection Protocol</th>
-                  <th># Specimen</th>
+                    <th>Collection Protocol</th>
+                    <th>Collection Status</th>
+                    <th>Protocol Category</th>
+                    <th>Specimen Type</th>
+                    <th>Preservation</th>
+                    <th>Anatomic Source</th>
+                    <th>Pathological Status</th>
+                    <th>Disease Status</th>
+                    <th># Specimen</th>
                 </tr>
               </thead>
             </table>
@@ -233,9 +196,11 @@
 
       <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
       <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.11/crossfilter.min.js"></script>
-      <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/dc/1.7.3/dc.js"></script>
+      <!-- <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/dc/1.7.4/dc.js"></script> -->
       <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/bootstrap-select.min.js"></script>
       <script type='text/javascript' src="js/excellentexport-1.4/excellentexport.js"></script>
+      <script type='text/javascript' src="js/dc-2.0.0-beta.18.js"></script>
+      <script type='text/javascript' src="js/dc-bubble-cloud.js"></script>
       <script type='text/javascript' src="HHOW-Visualizer.js"></script>
   </body>
 

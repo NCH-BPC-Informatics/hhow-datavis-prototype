@@ -14,8 +14,8 @@ function remove_empty_bins(source_group) {
 }
 
 var displayDateFormat = d3.time.format("%m/%d/%Y");
-var filename = "SpecimenStats.csv";
-d3.csv(filename, function (error, data) {
+var filename = "SpecimensV1_1.csv";
+d3.tsv(filename, function (error, data) {
     if (error) {
         var msg = "Could not read " + filename;
         console.log(msg);
@@ -104,7 +104,7 @@ d3.csv(filename, function (error, data) {
               .attr('dy', '-7')
               .attr('transform', "rotate(-90)");
         });
-        
+
 
     var specimenBiophysicalType = ndx.dimension(function (d) { return d.specimenBiophysicalType; });
     var specimenBiophysicalTypeGroup = specimenBiophysicalType.group().reduceSum(function (d) { return d.SpecimenCount; });
@@ -139,6 +139,21 @@ d3.csv(filename, function (error, data) {
         .legend(dc.legend().x(0).y(0))//.gap(5))
         //.innerRadius(50)
         .minAngleForLabel(100);
+
+    var race = ndx.dimension(function (d) { return d.Race; });
+    var raceGroup = race.group().reduceSum(function (d) { return d.SpecimenCount; });
+    var raceChart = dc.pieChart('#race')
+        .dimension(race)
+        .group(raceGroup)
+        .width(300) // (optional) define chart width, :default = 200
+        .height(500) // (optional) define chart height, :default = 200
+        .radius(50)
+        .cx(200)
+        .cy(50)
+        .legend(dc.legend().x(0).y(0))//.gap(5))
+        //.innerRadius(50)
+        .minAngleForLabel(100);
+
 
     dc.dataCount('.dc-data-count')
         .dimension(ndx)
